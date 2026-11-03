@@ -2,7 +2,7 @@
 
 **Cut LLM KV-Cache VRAM by 58.2% (`+30%` faster decoding) AND compress Vector Database / RAG Embeddings by 57.3% (`2.34x` faster search) with zero model retraining.**
 
-
+![HyperCache AI Benchmark](./Screenshot_Qwen2.5-3B-Instruct.png)
 
 HyperCache AI is a dual-engine runtime acceleration SDK for **PyTorch / Hugging Face LLMs** (`Qwen2.5`, `Llama-3`, `Mistral`, `Gemma`) and **Enterprise Vector Databases** (`Pinecone`, `Milvus`, `Qdrant`, `FAISS`, `pgvector`):
 1. **Engine 1 — LLM KV-Cache Runtime Compressor:** Preserves full-resolution semantic blocks while condensing historical background tokens on the fly, achieving **100% verbatim Needle-in-a-Haystack recall** while cutting GPU KV-Cache memory in half.

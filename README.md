@@ -1,7 +1,7 @@
 # HyperCache AI — Unified KV-Cache & Vector DB Acceleration SDK
 
 **Cut LLM KV-Cache VRAM by 58.2% (`+30%` faster decoding) AND compress Vector Database / RAG Embeddings by 57.3% (`2.34x` faster search) with zero model retraining.**
-
+![HyperCache AI Benchmark](./Screenshot_Qwen2.5-3B-Instruct.png)
 👉 **[Get Your Instant Annual PRO License Key on Gumroad (\$99/yr Launch Offer)](https://www.google.com/search?q=https://kotbster7.gumroad.com/l/hypercache-ai)**
 
 

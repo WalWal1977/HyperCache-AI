@@ -2,7 +2,9 @@
 
 **Cut LLM KV-Cache VRAM by 58.2% (`+30%` faster decoding) AND compress Vector Database / RAG Embeddings by 57.3% (`2.34x` faster search) with zero model retraining.**
 
-![HyperCache AI Benchmark](./Screenshot_Qwen2.5-3B-Instruct.png)
+👉 **[Get Your Instant Annual PRO License Key on Gumroad (\$99/yr Launch Offer)](https://www.google.com/search?q=https://kotbster7.gumroad.com/l/hypercache-ai)**
+
+
 
 HyperCache AI is a dual-engine runtime acceleration SDK for **PyTorch / Hugging Face LLMs** (`Qwen2.5`, `Llama-3`, `Mistral`, `Gemma`) and **Enterprise Vector Databases** (`Pinecone`, `Milvus`, `Qdrant`, `FAISS`, `pgvector`):
 1. **Engine 1 — LLM KV-Cache Runtime Compressor:** Preserves full-resolution semantic blocks while condensing historical background tokens on the fly, achieving **100% verbatim Needle-in-a-Haystack recall** while cutting GPU KV-Cache memory in half.
@@ -55,7 +57,7 @@ You can evaluate both engines right now on your own machine or in Google Colab u
   *(Hardware-locked to **15 free evaluation compressions** per machine, up to **4,096 tokens/dimensions** per call).*
 
 ### Step 1: Python Environment & Requirements
-> **Python Version Compatibility:** Because `hypercache_sdk_client.py` decrypts pre-compiled bytecode directly into volatile RAM, please run it using **Python 3.10 – 3.12** (standard in Google Colab and production Linux containers). *(Note: Make sure the Python version matches the build target; Enterprise PRO subscribers receive multi-version builds for Python 3.10, 3.11, 3.12, and 3.13).*
+> **Universal Python Version Support (3.8 – 3.13+):** `hypercache_sdk_client.py` decrypts and compiles the runtime engine in volatile RAM directly on your target Python interpreter, ensuring seamless compatibility across **Python 3.10, 3.11, 3.12, and 3.13** (including Google Colab, Kaggle, and production Linux/Windows servers).
 
 ```bash
 pip install numpy cryptography torch transformers accelerate
@@ -95,11 +97,13 @@ HyperCache AI is distributed as an **AES-256-GCM authenticated commercial vault*
 | Feature | Free Evaluation Trial | Developer / Startup PRO | Enterprise Cluster PRO | Enterprise Unlimited (K8s) |
 | :--- | :---: | :---: | :---: | :---: |
 | **Annual Price (Early-Bird Launch)** | **Free** | ~~$199/yr~~ **$99 / year** | ~~$999/yr~~ **$399 / year** | ~~$2,999/yr~~ **$1,499 / year** |
-| **License Key** | `HYPERCACHE-FREE-TRIAL-2026` | **Instant Delivery** | **Instant Delivery** | **Instant Delivery** |
+| **Purchase Instant License Key** | `HYPERCACHE-FREE-TRIAL-2026` | **[Buy Developer PRO (\$99/yr)](https://www.google.com/search?q=https://kotbster7.gumroad.com/l/hypercache-ai)** | **[Buy Cluster PRO (\$399/yr)](https://www.google.com/search?q=https://kotbster7.gumroad.com/l/hypercache-ai)** | **[Buy Unlimited K8s (\$1,499/yr)](https://www.google.com/search?q=https://kotbster7.gumroad.com/l/hypercache-ai)** |
 | **Active Machine Seats** | 1 Machine (Non-Transferable) | **2 Transferable Seats** *(Dev Laptop + 1 Prod Server)* | **10 Transferable Server Seats** | **Unlimited Nodes / Containers** *(Kubernetes Auto-Scaling)* |
 | **Machine Transfer (`deactivate`)** | No | **Yes (`deactivate_current_machine()`)** | **Yes (`deactivate_current_machine()`)** | **Automatic (Zero Seat Lock)** |
 | **Total Runs Allowed** | **15 Runs** (Hardware-Locked) | **Unlimited (24/7 Production)** | **Unlimited (24/7 Production)** | **Unlimited (24/7 Production)** |
 | **Max Context / Vector DB Size** | Up to **4,096 Tokens / Dims** | **Unlimited (32k–1M+ Tokens)** | **Unlimited (32k–1M+ Tokens)** | **Unlimited (Cluster-Wide)** |
+
+👉 **[Click Here to Purchase Your Instant Annual PRO License Key on Gumroad](https://www.google.com/search?q=https://kotbster7.gumroad.com/l/hypercache-ai)**
 
 ### Moving Your PRO License Between Machines
 Both **Developer PRO (2 Seats)** and **Enterprise Cluster PRO (10 Seats)** allow you to transfer active seats between workstations and cloud servers at any time with a single line of Python:

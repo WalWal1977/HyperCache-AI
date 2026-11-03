@@ -7,11 +7,14 @@ HyperCache AI — Unified KV-Cache & Vector DB Evaluation Suite (`quickstart_dem
 Test BOTH enterprise engines on your machine or in Google Colab using the Public
 Evaluation Trial Key: "HYPERCACHE-FREE-TRIAL-2026"
 
-What this script benchmarks:
-  1. Engine 1 (LLM KV-Cache Compression):
+What this script demonstrates:
+  1. Unlocks the AES-256-GCM Encrypted HyperCache SDK in volatile RAM and prints
+     your unique Machine Hardware ID (`engine.get_machine_hardware_id()`),
+     License Tier, and remaining Annual / Trial validity.
+  2. Engine 1 (LLM KV-Cache Compression):
      Compresses a 4,096-token attention cache by 57.5% (4096 -> 1741 tokens)
      with 99.96%+ Cosine Similarity and 2.35x speedup.
-  2. Engine 2 (Vector DB & RAG Embedding Compression):
+  3. Engine 2 (Vector DB & RAG Embedding Compression):
      Compresses 5,000 document embeddings of dimension 1,536 (OpenAI / Cohere /
      BGE standard) down to 656 dimensions (-57.3% Vector DB RAM) with 100.0%
      Top-1 retrieval accuracy and 99.92% similarity correlation!
@@ -37,7 +40,7 @@ except ModuleNotFoundError:
     hypercache_sdk_client = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(hypercache_sdk_client)
 
-# Replace with your paid Enterprise PRO Key for unlimited 24/7 production
+# Replace with your Annual PRO / Enterprise License Key for unlimited 24/7 production
 LICENSE_KEY = "HYPERCACHE-FREE-TRIAL-2026"
 
 
@@ -51,10 +54,13 @@ def run_quickstart_benchmark():
     engine = hypercache_sdk_client.load_hypercache_engine(license_key=LICENSE_KEY)
     unlock_ms = (time.perf_counter() - t0) * 1000.0
 
-    used_runs = engine.get_trial_usage_count()
+    status = engine.get_seat_status()
     print(f"[+] License Tier Unlocked : {engine.license_tier} ({unlock_ms:.1f} ms)")
-    if engine.license_tier == "FREE_EVALUATION_TRIAL":
-        print(f"[+] Hardware Trial Quota  : {used_runs}/15 runs used on this machine")
+    print(f"[+] Machine Hardware ID   : {status['machine_id']} (Validity: {status['days_remaining']} days remaining)")
+    if "trials_used" in status:
+        print(f"[+] Hardware Trial Quota  : {status['trials_used']}/15 runs used on this machine")
+    else:
+        print(f"[+] Active Machine Seats  : {status['seats_used']} / {status['seats_max']} (Transferable via `engine.deactivate_current_machine()`)")
 
     # ==========================================================================
     # ENGINE 1: LLM KV-CACHE RUNTIME COMPRESSION (4,096 TOKENS)
@@ -174,7 +180,7 @@ def run_quickstart_benchmark():
     print(f"  {'2. HyperCache Vector DB (Ours)':<34} | {top1_hc:11.1f}% | {rec10_hc:13.2f}% | {corr_hc:12.2f}%")
     print("-" * 86)
 
-    if engine.license_tier == "FREE_EVALUATION_TRIAL":
+    if "trials_used" in status:
         print(f"  [*] Remaining Free Hardware Trial Runs on this Machine: {15 - engine.get_trial_usage_count()}/15")
     print("=" * 86)
 

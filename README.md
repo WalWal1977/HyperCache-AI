@@ -31,7 +31,7 @@ HyperCache AI is a dual-engine runtime acceleration SDK for **PyTorch / Hugging 
 
 ### 2. Vector Database & RAG Embedding Benchmark (`5,000` Docs, `1536-D` $\to$ `656-D`)
 
-| Vector DB Compression Method (At 42.7% RAM Budget) | Compressed Dim | RAM Saved | Top-1 Match (↑) | Recall@10 (↑) | Cosine Score Correlation (↑) |
+| Vector DB Compression Method (At 42.7% RAM Budget) | Compressed Dim | RAM Saved | Top-1 Match ($\uparrow$) | Recall@10 ($\uparrow$) | Cosine Score Correlation ($\uparrow$) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **1. Standard Dimension Truncation** | 656-D | 57.29% | 99.0% | 22.90% | 66.28% |
 | **2. HyperCache Vector DB Engine (Ours)** | **656-D** | **57.29%** | **100.0%** | **95.20%** | **99.92%** |
@@ -40,7 +40,7 @@ HyperCache AI is a dual-engine runtime acceleration SDK for **PyTorch / Hugging 
 
 ### 3. Multi-Head Long-Context Attention Fidelity (`N = 4,096` Tokens, 16 Heads)
 
-| Compression Method (At Identical 42.5% RAM Budget) | Output Cosine Similarity (↑) | Relative L2 Error (↓) | Fact Recall (↑) | Theoretical Speedup |
+| Compression Method (At Identical 42.5% RAM Budget) | Output Cosine Similarity ($\uparrow$) | Relative L2 Error ($\downarrow$) | Fact Recall ($\uparrow$) | Theoretical Speedup |
 | :--- | :---: | :---: | :---: | :---: |
 | **1. Standard Sliding Window** | 66.73% | 115.84% | 40.0% | 2.35x |
 | **2. Uniform Strided Subsampling** | 63.47% | 114.45% | 20.0% | 2.35x |
@@ -54,7 +54,9 @@ You can evaluate both engines right now on your own machine or in Google Colab u
 * **Public Evaluation Key:** `HYPERCACHE-FREE-TRIAL-2026`
   *(Hardware-locked to **15 free evaluation compressions** per machine, up to **4,096 tokens/dimensions** per call).*
 
-### Step 1: Install Requirements
+### Step 1: Python Environment & Requirements
+> **Python Version Compatibility:** Because `hypercache_sdk_client.py` decrypts pre-compiled bytecode directly into volatile RAM, please run it using **Python 3.10 – 3.12** (standard in Google Colab and production Linux containers). *(Note: Make sure the Python version matches the build target; Enterprise PRO subscribers receive multi-version builds for Python 3.10, 3.11, 3.12, and 3.13).*
+
 ```bash
 pip install numpy cryptography torch transformers accelerate
 ```
@@ -86,17 +88,23 @@ compressed_queries = engine.compress_query_embeddings(query_embeddings_1536d)
 
 ---
 
-## Licensing & Enterprise Tiers
+## Annual Licensing, Early-Bird Pricing & Seat Management
 
 HyperCache AI is distributed as an **AES-256-GCM authenticated commercial vault** (`hypercache_sdk_client.py`) that decrypts strictly in volatile RAM upon license verification.
 
-| Feature | Free Evaluation Trial | Enterprise PRO License |
-| :--- | :---: | :---: |
-| **License Key** | `HYPERCACHE-FREE-TRIAL-2026` | **Issued Instantly Upon Purchase** |
-| **Total Runs Allowed** | **15 Runs** (Hardware-Locked per Machine) | **Unlimited (24/7 Production Servers)** |
-| **Max Context / Dimension Size** | Up to **4,096 Tokens / Dims** | **Unlimited (32k, 128k, 1M+ Tokens & Unlimited Vector DB)** |
-| **Engines Included** | LLM KV-Cache + Vector DB / RAG | LLM KV-Cache + Vector DB / RAG |
-| **Deployment** | Local Testing & Benchmarking | Commercial Cloud, On-Premise & Edge |
+| Feature | Free Evaluation Trial | Developer / Startup PRO | Enterprise Cluster PRO | Enterprise Unlimited (K8s) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Annual Price (Early-Bird Launch)** | **Free** | ~~$199/yr~~ **$99 / year** | ~~$999/yr~~ **$399 / year** | ~~$2,999/yr~~ **$1,499 / year** |
+| **License Key** | `HYPERCACHE-FREE-TRIAL-2026` | **Instant Delivery** | **Instant Delivery** | **Instant Delivery** |
+| **Active Machine Seats** | 1 Machine (Non-Transferable) | **2 Transferable Seats** *(Dev Laptop + 1 Prod Server)* | **10 Transferable Server Seats** | **Unlimited Nodes / Containers** *(Kubernetes Auto-Scaling)* |
+| **Machine Transfer (`deactivate`)** | No | **Yes (`deactivate_current_machine()`)** | **Yes (`deactivate_current_machine()`)** | **Automatic (Zero Seat Lock)** |
+| **Total Runs Allowed** | **15 Runs** (Hardware-Locked) | **Unlimited (24/7 Production)** | **Unlimited (24/7 Production)** | **Unlimited (24/7 Production)** |
+| **Max Context / Vector DB Size** | Up to **4,096 Tokens / Dims** | **Unlimited (32k–1M+ Tokens)** | **Unlimited (32k–1M+ Tokens)** | **Unlimited (Cluster-Wide)** |
 
-### Upgrade to Enterprise PRO
-Once your machine consumes its 15 evaluation runs (or if you need to compress sequences/embeddings larger than 4,096), replace the trial key with your **Enterprise PRO License Key** to unlock unlimited 24/7 production execution immediately without changing a single line of code.
+### Moving Your PRO License Between Machines
+Both **Developer PRO (2 Seats)** and **Enterprise Cluster PRO (10 Seats)** allow you to transfer active seats between workstations and cloud servers at any time with a single line of Python:
+```python
+# Frees the current machine seat immediately so you can activate on a new server:
+print(engine.deactivate_current_machine())
+```
+*(For dynamic Kubernetes / Docker auto-scaling environments where pods spin up and down continuously, choose **Enterprise Unlimited (K8s)** for zero seat-tracking overhead).*
